@@ -14,8 +14,10 @@ class Playlist(db.Model):
     __tablename__ = 'playlists'
 
     id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.Text, nullable=False)
-    description = db.Column(db.Text, nullable=False)
+    name = db.Column(db.String(30), nullable=False, unique=True)
+    description = db.Column(db.String(100), nullable=False)
+
+    # assignments = db.relationship('PlaylistSong', backref="playlist")
 
 
 
@@ -24,8 +26,10 @@ class Song(db.Model):
     __tablename__ = 'songs'
 
     id = db.Column(db.Integer, primary_key = True)
-    title = db.Column(db.Text, nullable=False)
-    artist = db.Column(db.Text, nullable=False)
+    title = db.Column(db.String(100), nullable=False)
+    artist = db.Column(db.String(100), nullable=False)
+
+    # assignments = db.relationship('PlaylistSong', backref="song")
 
     # ADD THE NECESSARY CODE HERE
 
@@ -35,8 +39,10 @@ class PlaylistSong(db.Model):
     __tablename__ = 'playlists_songs'
 
     id = db.Column(db.Integer, primary_key = True)
-    playlist_id = db.Column(db.Integer, nullable=False)
-    song_id = db.Column(db.Integer, nullable=False)
+    playlist_id = db.Column(db.Integer, db.ForeignKey('playlist.id'), nullable=False)
+    song_id = db.Column(db.Integer, db.ForeignKey('song.id'), nullable=False)
+
+
     # ADD THE NECESSARY CODE HERE
 
 
