@@ -39,8 +39,8 @@ class PlaylistSong(db.Model):
     playlist_id = db.Column(db.Integer, db.ForeignKey('playlists.id'), nullable=False)
     song_id = db.Column(db.Integer, db.ForeignKey('songs.id'), nullable=False)
 
-    # song = db.relationship('Song', backref='playlists')
-    # playlist = db.relationship('Playlist', backref='songs')
+    song = db.relationship('Song', backref='playlists')
+    playlist = db.relationship('Playlist', backref='songs')
 
 
 # DO NOT MODIFY THIS FUNCTION
